@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./:/app
+    ports:
+      - "5191:5191"
+    environment:
+      ASPNETCORE_URLS: 0.0.0.0
+      DOTNET_WATCH_RESTART_ON_RUDE_EDIT: true
+  db:
+    image: percona/percona-server:8.0
+    platform: linux/amd64
+    restart: unless-stopped
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: "weshare"
+      MYSQL_USER: "db"
+      MYSQL_PASSWORD: "db"
+    ports:
+      - "3306:3306"
+volumes:
+  dbdata:
