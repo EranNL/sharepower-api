@@ -22,10 +22,11 @@ services:
       - dbdata:/var/lib/mysql
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_DATABASE: "weshare"
+      MYSQL_DATABASE: "sharepower"
       MYSQL_USER: "db"
       MYSQL_PASSWORD: "db"
     ports:
       - "3306:3306"
+
 volumes:
   dbdata:
